@@ -3,11 +3,11 @@ const ruta = express.Router();
 
 
 const {
-  getOfertaLaboral,
+  getOfertaLaboralById,
   getOfertasLaborales,
   crearOfertaLaboral,
-  actualizarOfertaLaboral,
-  eliminarOfertaLaboral,
+  updateOfertaLaboral,
+  deleteOfertaLaboral,
 } = require("../controllers/ofertaLaboral");
 
 ruta
@@ -16,8 +16,8 @@ ruta
     .post(crearOfertaLaboral)
 ruta
     .route('/:id')
-    .get(getOfertaLaboral)
-    .put(actualizarOfertaLaboral)
-    .delete(eliminarOfertaLaboral)
+    .get(getOfertaLaboralById)
+    .put(updateOfertaLaboral)
+    .delete(deleteOfertaLaboral)
 
 module.exports = ruta;
