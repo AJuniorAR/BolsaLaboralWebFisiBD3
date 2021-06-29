@@ -8,6 +8,7 @@ const {
   crearOfertaLaboral,
   updateOfertaLaboral,
   deleteOfertaLaboral,
+  pagination
 } = require("../controllers/ofertaLaboral");
 
 ruta
@@ -19,5 +20,7 @@ ruta
     .get(getOfertaLaboralById)
     .put(updateOfertaLaboral)
     .delete(deleteOfertaLaboral)
-
+ruta  
+    .route('/pagination')
+    .post(pagination)
 module.exports = ruta;

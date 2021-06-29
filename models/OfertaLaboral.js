@@ -6,7 +6,7 @@ const OfertaLaboralSchema = new mongoose.Schema({
     maxlenght: [500, "El puesto de trabajo no tiene que ser tan largo"],
     type: String,
   },
-  empresa: { id: String, nombreCompeto: String },
+  empresa: {  id: String, nombreCompleto: String },
   requerimientos: String,
   descripcion: String,
   area: String,
@@ -15,4 +15,4 @@ const OfertaLaboralSchema = new mongoose.Schema({
   vacantes: Number,
 });
 
-module.exports = mongoose.model("OfertaLaboral", OfertaLaboralSchema);
+module.exports = mongoose.model("Ofertas_Laborales", OfertaLaboralSchema);

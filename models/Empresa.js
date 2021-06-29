@@ -7,4 +7,4 @@ const EmpresaSchema=new mongoose.Schema({
     contacto:String
 });
 
-module.exports=mongoose.model('Empresa',EmpresaSchema);
+module.exports=mongoose.model('Empresas',EmpresaSchema);
