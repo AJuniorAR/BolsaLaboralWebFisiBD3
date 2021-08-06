@@ -8,6 +8,7 @@ const schemaRegister = Joi.object({
   password: Joi.string().min(6).max(1024).required(),
   estudiante: Joi.object(),
   ofertador: Joi.object(),
+  roles: Joi.object(),
 });
 
 const schemaRegister2 = Joi.object({

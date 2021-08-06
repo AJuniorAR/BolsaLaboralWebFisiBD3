@@ -1,3 +1,4 @@
+const { startSession } = require("mongoose");
 const ErrorResponse = require("../helper/errorResponse");
 const Usuario = require("../models/Usuario");
 const UsuarioEstudiante=require("../models/UsuarioEstudiante");
@@ -5,7 +6,9 @@ const UsuarioEstudiante=require("../models/UsuarioEstudiante");
 
 
   exports.postularOferta = async (req, res, next) => {
+    const session = await startSession();
     try {
+      session.startTransaction();
       const usuario1 = await Usuario.findById(
         req.params.id
       );
@@ -16,8 +19,9 @@ const UsuarioEstudiante=require("../models/UsuarioEstudiante");
           $addToSet:{
             aplying:req.body.aplying
           }
-        }
+        },{session}
       );
+      await session.commitTransaction();
       if (!updatedUser) {
         return next(
           new ErrorResponse(
@@ -30,8 +34,10 @@ const UsuarioEstudiante=require("../models/UsuarioEstudiante");
         status: 200,
         data: updatedUser
       });
+      session.endSession();
     } catch (err) {
-      
+      await session.abortTransaction();
+      session.endSession();
       next(
         new ErrorResponse(
           "La oferta no existe con este id: " + req.params.id,
@@ -51,5 +57,7 @@ const UsuarioEstudiante=require("../models/UsuarioEstudiante");
       res.json(usuarios);
     })
     .populate('estudiante', 'emailInstitucional centroDeEstudios ciclo aplying')
-    .populate('ofertador','emailRegular jobPosting');
+    .populate('ofertador','emailRegular jobPosting')
+    .populate('roles','name')
+    .populate({path:'estudiante',populate:[{path:'aplying',select:'puestoDeTrabajo'}]});
   }

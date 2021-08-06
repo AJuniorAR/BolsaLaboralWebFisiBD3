@@ -1,6 +1,6 @@
 const express = require("express");
 const ruta = express.Router();
-
+const {verifyToken,isEstudiante} = require('../middleware/validateToken');
 
 const {
   getOfertaLaboralById,
@@ -13,7 +13,7 @@ const {
 
 ruta
     .route('/')
-    .get(getOfertasLaborales)
+    .get([verifyToken,isEstudiante],getOfertasLaborales)
     .post(crearOfertaLaboral)
 ruta
     .route('/:id')

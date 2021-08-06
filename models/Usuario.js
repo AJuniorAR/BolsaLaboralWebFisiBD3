@@ -16,6 +16,12 @@ const UsuarioSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "UsuarioEmpresa",
     },
+    roles: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Role",
+      },
+    ],
     
   },
   {

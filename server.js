@@ -13,11 +13,16 @@ const empresa=require('./rutas/empresa');
 const auth=require('./rutas/auth');
 const usuario=require('./rutas/usuario');
 const adminRoutes = require('./rutas/admin');
-const verifyToken = require('./middleware/vaidateToken');
+const {verifyToken} = require('./middleware/validateToken');
+
+const createRoles=require("./libs/initialSetup") ;
 
 const app = express();
 
 app.use(express.json());
+
+createRoles.createRoles();
+
 var corsOptions = {
   origin: '*', // Reemplazar con dominio
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204

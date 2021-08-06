@@ -5,7 +5,7 @@ exports.getRutaProtegida = async (req, res, next) => {
         error: null,
         data: {
             title: 'mi ruta protegida',
-            user: req.user
+            user: req.userId
         }
     })
   };
